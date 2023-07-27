@@ -1,29 +1,32 @@
-import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { api } from "~/utils/api";
 import Input from "~/components/input"
 import { useState } from "react";
 
+
+
 export default function Home() {
-  const post = api.postapi.postsample.useMutation();
+  //const post = api.postapi.postsample.useMutation();
+  //  const post = api.example.hello.;
+const cat = api.example.hello.useQuery({ text: "test" });
+  
+
   const[inputs,setInputs]=useState({
     name:"",
     email:"",
     age:"",
   });
-  const getinputdata=(event:React.ChangeEvent<HTMLInputElement>)=>{
-    let{name,value}=event.target;
-    let u ={[name]:value};
-    setInputs((prev)=>({...prev, ...u}));
-    
-   
-  };
 
-  const sendinput=()=>{
+  function getinputdata(event: React.ChangeEvent<HTMLInputElement>) {
+    let { name, value } = event.target;
+    let u = { [name]: value };
+    setInputs((prev) => ({ ...prev, ...u }));
+  }
+
+  function sendinput() {
     console.log(inputs);
-    post.mutate(inputs);
-  };
+    console.log(cat);
+  }
 
   return (
     <>
@@ -36,8 +39,13 @@ export default function Home() {
         <Input type="text" name="name" placeholder="Enter Your Name" onChange={getinputdata}/>
         <Input type="email" name="email" placeholder="Enter Your Email" onChange={getinputdata}/>
         <Input type="text" name="age" placeholder="Enter Your Age" onChange={getinputdata}/>
-
         <button onClick={sendinput} className="btn btn-primary">Add Data</button>
+
+        <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-xs m-2" />
+        <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-xs m-2" />
+        <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-xs m-2" />
+        <button className="btn btn-active btn-primary">Primary</button>
+       
       </main>
     </>
   );
